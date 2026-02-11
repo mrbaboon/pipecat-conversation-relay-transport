@@ -1,0 +1,53 @@
+[project]
+name = "pipecat-conversation-relay"
+version = "0.1.0"
+description = "Pipecat transport for Twilio ConversationRelay WebSocket integration"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "pipecat-ai>=0.0.95",
+    "fastapi>=0.100",
+]
+
+[project.optional-dependencies]
+twilio = ["twilio>=9.0.0"]
+
+[build-system]
+requires = ["uv_build>=0.10.2,<0.11.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.10",
+    "pre-commit>=3.7",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.5",
+    "twilio>=9.0.0",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
