@@ -138,7 +138,7 @@ class ConversationRelayInputTransport(BaseInputTransport):
 
     async def _handle_prompt(self, message: dict[str, Any]) -> None:
         last = message.get("last", False)
-        voice_prompt = message.get("voicePrompt", "")
+        voice_prompt = message.get("voicePrompt") or ""
         lang = message.get("lang")
 
         if not last:
