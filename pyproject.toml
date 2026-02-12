@@ -1,6 +1,6 @@
 [project]
 name = "pipecat-conversation-relay"
-version = "0.1.0"
+version = "0.1.1"
 description = "Pipecat transport for Twilio ConversationRelay WebSocket integration"
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
