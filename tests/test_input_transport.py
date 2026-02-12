@@ -136,6 +136,26 @@ class TestPromptMessage:
         transcription_frames = [f for f in pushed_frames if isinstance(f, TranscriptionFrame)]
         assert len(transcription_frames) == 0
 
+    @pytest.mark.asyncio
+    async def test_null_voice_prompt_is_ignored(self):
+        prompt_msg = {
+            "type": "prompt",
+            "voicePrompt": None,
+            "lang": "en-US",
+            "last": True,
+        }
+
+        ws = make_ws_with_messages([prompt_msg])
+        transport = make_input_transport(ws)
+
+        pushed_frames = []
+        transport.push_frame = AsyncMock(side_effect=lambda f, *a, **kw: pushed_frames.append(f))
+
+        await transport._receive_messages()
+
+        transcription_frames = [f for f in pushed_frames if isinstance(f, TranscriptionFrame)]
+        assert len(transcription_frames) == 0
+
 
 class TestInterruptMessage:
     @pytest.mark.asyncio
